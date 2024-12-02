@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex justify-center items-center h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded shadow-lg w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        {{#if error_msg}}
+        <div class="bg-red-100 text-red-800 p-2 rounded mb-4">
+            {{error_msg}}
+        </div>
+        {{/if}}
+        <p>{{t 'SYS.MESSAGE.DESCRIPTION'}}</p>
+        <form action="/auth/login" method="POST" class="space-y-4">
+            <div>
+                <label for="email" class="block text-gray-700">User</label>
+                <input type="text" name="email" id="email" class="w-full border border-gray-300 rounded p-2">
+            </div>
+            <div>
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" name="password" id="password" required
+                    class="w-full border border-gray-300 rounded p-2">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Login</button>
+        </form>
+        <div class="text-center mt-4">
+            <a href="/auth/google" class="text-blue-500">Login with Google</a>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="text-gray-500">Forgot Password?</a>
+        </div>
+    </div>
+</body>
+
+</html>

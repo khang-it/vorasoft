@@ -1,0 +1,13 @@
+{
+	"SYS": {
+		"MESSAGE": {
+			"DESCRIPTION": "THIS IS DEMO VERSION"
+		},
+		"LABEL": {
+			"WELCOME": "WELCOME"
+		}
+	},
+	"SYS.LABEL.WELCOME": "1",
+	"SYS.MESSAGE.DESCRIPTION": "2",
+	"welcome": "Chào mừng đến với ZTA!"
+}

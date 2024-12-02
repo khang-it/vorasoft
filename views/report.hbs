@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">Report Management</h1>
+        <form action="/report/generate" method="POST" target="_blank">
+            <textarea name="reportContent" rows="10" placeholder="Enter HTML content here"
+                class="w-full border rounded p-2"></textarea>
+            <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Generate
+                PDF</button>
+        </form>
+    </div>
+</body>
+
+</html>
