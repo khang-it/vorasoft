@@ -18,7 +18,6 @@ html {
 /* Menu Bar */
 .menu-bar {
     background-color: #005333;
-    /* Main theme color */
     color: #fff;
     padding: 0;
     margin: 0;
@@ -43,17 +42,16 @@ html {
     display: block;
     font-weight: bold;
     transition: background 0.3s ease;
+    white-space: nowrap;
 }
 
 .menu-bar .menu>li>a:hover {
     background-color: #007a52;
-    /* Slightly lighter green */
 }
 
-/* Submenus */
+/* Submenu Styles */
 .menu-bar .menu ul.menu {
     display: none;
-    /* Ẩn mặc định */
     position: absolute;
     top: 100%;
     left: 0;
@@ -61,7 +59,6 @@ html {
     list-style: none;
     margin: 0;
     padding: 0;
-    border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 100;
 }
@@ -70,12 +67,14 @@ html {
     position: relative;
 }
 
+/* Submenu Items */
 .menu-bar .menu ul.menu>li>a {
     padding: 10px 15px;
     font-weight: normal;
     display: block;
     color: #fff;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .menu-bar .menu ul.menu>li>a:hover {
@@ -86,6 +85,57 @@ html {
 .menu-bar .menu>li:hover>ul {
     display: block;
 }
+
+/* Cấp 2 trở đi - Hiển thị mũi tên phải */
+.menu-bar .menu ul.menu>li>a:after {
+    content: "▶";
+    font-size: 10px;
+    margin-left: 5px;
+    color: #fff;
+    display: none;
+    /* Không hiển thị mặc định */
+}
+
+.menu-bar .menu ul.menu>li>ul {
+    left: 100%;
+    /* Đẩy submenu cấp 2 trở đi sang phải */
+    top: 0;
+}
+
+/* Cấp 3 trở đi - Hiển thị mũi tên phải */
+.menu-bar .menu ul.menu ul.menu>li>a:after {
+    content: "▶";
+    /* Mũi tên phải */
+    font-size: 10px;
+    margin-left: 5px;
+    display: none;
+    /* Không hiển thị mặc định */
+}
+
+
+/* Submenu Styles */
+.menu-bar .menu ul.menu>li>a:after {
+    content: "▶";
+    /* Mặc định dấu mũi tên phải */
+    font-size: 10px;
+    margin-left: 5px;
+    color: #fff;
+    display: none;
+    /* Không hiển thị mặc định */
+}
+
+/* Chỉ hiện dấu mũi tên khi có submenu */
+.menu-bar .menu ul.menu>li:has(> ul)>a:after {
+    display: inline-block;
+    /* Hiển thị mũi tên khi có submenu */
+}
+
+/* Ẩn dấu mũi tên với các menu cuối */
+.menu-bar .menu ul.menu>li:not(:has(> ul))>a:after {
+    display: none;
+    /* Không hiển thị nếu không có submenu */
+}
+
 
 /* Toolbar */
 .toolbar {

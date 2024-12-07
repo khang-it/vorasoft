@@ -19,7 +19,13 @@ const menuItems = [
 
     { id: 200, name: 'Tệp', route: '/file', parent_id: 3 },
     { id: 201, name: 'Thư mục', route: '/folder', parent_id: 3 },
+    { id: 203, name: 'Mở', route: '/folder', parent_id: 4 },
+
+    { id: 301, name: 'Mở 1', route: '/folder', parent_id: 201 },
+    { id: 302, name: 'Mở 2', route: '/folder', parent_id: 201 },
 ];
+
+console.log(JSON.stringify(buildMenuTree(menuItems), null, 4));
 
 module.exports = {
     menus: buildMenuTree(menuItems),
