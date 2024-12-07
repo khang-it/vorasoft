@@ -36,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const { ensureAuthenticated } = require('./middleware/auth');
 const passport = require('./config/passport');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -80,14 +81,26 @@ app.use((req, res, next) => {
   next();
 })
 
+app.use((req, res, next) => {
+  const publicRoutes = ['/auth/login', '/auth/register'];
+  if (publicRoutes.includes(req.path)) {
+    return next();
+  }
+  // Set default layout
+  res.locals.layout = 'classic-office-layout';
+  res.locals.menus = require('./resources/menu').menus;
+  ensureAuthenticated(req, res, next)
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 
 app.use('/report', require('./routes/report'));
-app.use('/db', require('./routes/db'));
+app.use('/settings', require('./routes/db'));
 app.use('/users', require('./routes/users'));
 app.use('/resources', require('./routes/resources'));
+app.use('/office', require('./routes/office'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -105,35 +118,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-const http = require('http');
-const socketIo = require('socket.io');
-const getServerStats = require('./utils/server-stats');
-
-const server = http.createServer(app);
-const io = socketIo(server);
-
-io.on('connection', (socket) => {
-  console.log('Client connected');
 
 
-  const interval = setInterval(async () => {
-    const stats = await getServerStats();
-    socket.emit('server-stats', stats);
-  }, 2000);
+module.exports = { app };
 
-  socket.on('disconnect', () => {
-    clearInterval(interval);
-    console.log('Client disconnected');
-  });
-});
-
-// const port = 3001;
-// server.listen(port, () => {
-//   console.log(`Server websocket running at http://localhost:${port}`);
-// });
-
-module.exports = {
-  app,
-  io,
-  server
-};

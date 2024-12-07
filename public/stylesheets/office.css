@@ -1,0 +1,128 @@
+/* General Reset */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+/* App Container */
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Menu Bar */
+.menu-bar {
+    background-color: #005333;
+    /* Main theme color */
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.menu-bar .menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-bar .menu>li {
+    position: relative;
+}
+
+.menu-bar .menu>li>a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    display: block;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.menu-bar .menu>li>a:hover {
+    background-color: #007a52;
+    /* Slightly lighter green */
+}
+
+/* Submenus */
+.menu-bar .menu ul.menu {
+    display: none;
+    /* Ẩn mặc định */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #007a52;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.menu-bar .menu ul.menu>li {
+    position: relative;
+}
+
+.menu-bar .menu ul.menu>li>a {
+    padding: 10px 15px;
+    font-weight: normal;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu-bar .menu ul.menu>li>a:hover {
+    background-color: #009c6b;
+}
+
+/* Hiển thị submenu khi hover */
+.menu-bar .menu>li:hover>ul {
+    display: block;
+}
+
+/* Toolbar */
+.toolbar {
+    background-color: #f3f3f3;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.toolbar button {
+    background-color: #005333;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.toolbar button:hover {
+    background-color: #007a52;
+}
+
+/* Workspace */
+.workspace {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+/* Footer */
+.status-bar {
+    background-color: #005333;
+    color: #fff;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 14px;
+}

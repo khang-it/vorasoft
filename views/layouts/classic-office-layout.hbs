@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/stylesheets/office.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Menu Bar -->
+        <nav class="menu-bar">
+            <ul class="menu">
+                {{#each menus}}
+                <li>
+                    <a href="{{route}}">{{name}}</a>
+                    {{#if submenus}}
+                    <ul class="menu">
+                        {{#each submenus}}
+                        <li>
+                            <a href="{{route}}">{{name}}</a>
+                            {{#if submenus}}
+                            {{> submenu submenus=submenus }}
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+        </nav>
+
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button>New</button>
+            <button>Open</button>
+            <button>Save</button>
+            <button>Print</button>
+        </div>
+
+        <!-- Workspace -->
+        <div class="workspace">
+            {{{body}}}
+        </div>
+
+        <!-- Footer -->
+        <div class="status-bar">
+            <span>Page 1 of 1</span>
+            <span>Word 2003 Interface</span>
+        </div>
+    </div>
+</body>
+
+</html>

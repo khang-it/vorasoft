@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-const { app, io, server } = require('../app');
+const { app } = require('../app');
 const debug = require('debug')('vorasf:server');
 const http = require('http');
+const initWebSocket = require('../sockets');
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +20,12 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-//var server = http.createServer(app);
+const server = http.createServer(app);
+
+/**
+ * Create Websocket.
+ */
+initWebSocket(server);
 
 /**
  * Listen on provided port, on all network interfaces.

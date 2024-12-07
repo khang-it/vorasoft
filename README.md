@@ -1,7 +1,7 @@
 
 # 1. Khởi tạo dự án
 
-npx express-generator --view=hbs zta
+npx express-generator --view=hbs vorasoft
 cd zta
 npm install
 

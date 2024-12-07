@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Render settings page
-router.get('/settings', (req, res) => {
+router.get('/', (req, res) => {
     res.render('db-settings');
 });
 

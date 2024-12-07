@@ -1,0 +1,10 @@
+<ul class="menu">
+    {{#each submenus}}
+    <li>
+        <a href="{{route}}">{{name}}</a>
+        {{#if submenus}}
+        {{> submenu submenus=submenus }}
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>

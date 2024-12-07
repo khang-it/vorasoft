@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4 shadow">
+        <h1 class="text-xl font-bold">{{title}}</h1>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="flex flex-1">
+        <nav class="bg-gray-200 w-64 p-4">
+            <ul class="space-y-2">
+                {{#each menus}}
+                <li><a href="{{this.route}}" class="block font-semibold hover:text-blue-500">{{this.name}}</a></li>
+                {{/each}}
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="flex-1 bg-white p-6 shadow-lg">
+            {{{body}}}
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-2">
+        <p>© 2024 Office Dashboard.</p>
+    </footer>
+</body>
+
+</html>

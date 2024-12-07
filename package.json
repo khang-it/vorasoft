@@ -34,5 +34,11 @@
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2",
     "socket.io": "^4.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "views/**/*",
+      "public/**/*"
+    ]
   }
 }
