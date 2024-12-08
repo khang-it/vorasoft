@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { menus } = require('../resources/menu');
+// const { menus } = require('../resources/menu');
+// , {
+//     layout: 'classic-office-layout',
+//     title: 'Welcome VoraSoft',
+//     menus: menus,
+//     hideToolbar: menus?.settings?.hideToolbar,
+// }
 
 
 router.get('/', (req, res) => {
-    res.render('home', {
-        layout: 'classic-office-layout',
-        title: 'Welcome VoraSoft',
-        menus: menus,
-    });
+    res.render('home');
 });
 
 module.exports = router;

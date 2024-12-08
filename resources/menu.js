@@ -1,6 +1,8 @@
 const buildMenuTree = require('../utils/lib');
+const { settings } = require('./settings');
 
 const menuItems = [
+
     { id: 1, name: 'Home', route: '/', parent_id: null },
     { id: 2, name: 'File', route: '/file', parent_id: null },
     { id: 3, name: 'New', route: '/file/new', parent_id: 2 },
@@ -25,7 +27,10 @@ const menuItems = [
     { id: 302, name: 'Mở 2', route: '/folder', parent_id: 201 },
 ];
 
-console.log(JSON.stringify(buildMenuTree(menuItems), null, 4));
+if (settings?.log3) {
+    console.log(JSON.stringify(buildMenuTree(menuItems), null, 4));
+}
+
 
 module.exports = {
     menus: buildMenuTree(menuItems),

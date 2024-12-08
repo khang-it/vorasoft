@@ -102,17 +102,6 @@ html {
     top: 0;
 }
 
-/* Cấp 3 trở đi - Hiển thị mũi tên phải */
-.menu-bar .menu ul.menu ul.menu>li>a:after {
-    content: "▶";
-    /* Mũi tên phải */
-    font-size: 10px;
-    margin-left: 5px;
-    display: none;
-    /* Không hiển thị mặc định */
-}
-
-
 /* Submenu Styles */
 .menu-bar .menu ul.menu>li>a:after {
     content: "▶";

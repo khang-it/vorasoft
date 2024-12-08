@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+const { settings } = require('./resources/settings');
 
 const app = express();
 const exphbs = require('express-handlebars');
@@ -87,8 +88,16 @@ app.use((req, res, next) => {
     return next();
   }
   // Set default layout
-  res.locals.layout = 'classic-office-layout';
-  res.locals.menus = require('./resources/menu').menus;
+  const options = {
+    layout: 'classic-office-layout',
+    menus: require('./resources/menu').menus,
+    settings,
+  };
+  if (settings?.log) {
+    console.log('settings:', options)
+  }
+
+  res.locals = options;
   ensureAuthenticated(req, res, next)
 });
 
