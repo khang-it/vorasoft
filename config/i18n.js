@@ -7,7 +7,7 @@ i18n.configure({
     defaultLocale: 'en',
     queryParameter: 'lang',
     autoReload: true,
-    syncFiles: true,
+    syncFiles: false,
 });
 
 module.exports = i18n;

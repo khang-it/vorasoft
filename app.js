@@ -59,17 +59,6 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  // res.locals.t = (key, ...args) => {
-  //   //return i18n.__.apply(req, [key].concat(args));
-  //   const value = i18n.__.apply(req, [key].concat(args));
-  //   console.log('Current locale:', req.getLocale());
-  //   console.log(`Key: ${key}, Translated Value: ${value}`);
-  //   return value;
-  // };
-  // next();
-})
-
-app.use((req, res, next) => {
   const publicRoutes = ['/auth/login', '/auth/register'];
   if (publicRoutes.includes(req.path)) {
     return next();
@@ -113,8 +102,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = { app };
 

@@ -1,8 +1,9 @@
+const i18n = require('../config/i18n');
+
 const helpers = {
     t: (key, ...args) => {
         try {
-            const value = i18n.__(key, ...args.slice(-1));
-            return value;
+            return i18n.__(key, ...args.slice(0, -1));
         } catch (err) {
             return key;
         }
