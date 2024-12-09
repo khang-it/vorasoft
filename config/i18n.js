@@ -8,6 +8,7 @@ i18n.configure({
     queryParameter: 'lang',
     autoReload: true,
     syncFiles: false,
+    objectNotation: true,
 });
 
 module.exports = i18n;
