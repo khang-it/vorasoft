@@ -1,33 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 const { settings } = require('./resources/settings');
 
 const app = express();
-const exphbs = require('express-handlebars');
+const hbsEngine = require('./handlebars/configuration');
 const i18n = require('./config/i18n.js');
 app.use(i18n.init);
-app.engine('hbs', exphbs.engine({
-  extname: '.hbs',
-  defaultLayout: 'layout',
-  partialsDir: path.join(__dirname, 'views/partials'),
-  layoutsDir: path.join(__dirname, 'views/layouts'),
-  // helpers: {
-  //   t: (key, ...args) => {
-  //     const value = i18n.__.apply(this, [key].concat(args));
-  //     console.log('key, args:', key, args)
-  //     console.log(`Translate key: ${key}, value: ${value}`, i18n.__);
-  //     return value;
-  //   },
-  // },
-}));
 
+app.engine('hbs', hbsEngine);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -72,14 +59,14 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.locals.t = (key, ...args) => {
-    //return i18n.__.apply(req, [key].concat(args));
-    const value = i18n.__.apply(req, [key].concat(args));
-    console.log('Current locale:', req.getLocale());
-    console.log(`Key: ${key}, Translated Value: ${value}`);
-    return value;
-  };
-  next();
+  // res.locals.t = (key, ...args) => {
+  //   //return i18n.__.apply(req, [key].concat(args));
+  //   const value = i18n.__.apply(req, [key].concat(args));
+  //   console.log('Current locale:', req.getLocale());
+  //   console.log(`Key: ${key}, Translated Value: ${value}`);
+  //   return value;
+  // };
+  // next();
 })
 
 app.use((req, res, next) => {

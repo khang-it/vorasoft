@@ -9,5 +9,6 @@
 	},
 	"SYS.LABEL.WELCOME": "1",
 	"SYS.MESSAGE.DESCRIPTION": "2",
-	"welcome": "Chào mừng đến với ZTA!"
+	"welcome": "Chào mừng đến với ZTA!",
+	"vora": "Voras %s -> %s:"
 }
