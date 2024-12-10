@@ -86,6 +86,7 @@ app.use('/settings', require('./routes/db'));
 app.use('/users', require('./routes/users'));
 app.use('/resources', require('./routes/resources'));
 app.use('/office', require('./routes/office'));
+app.use(require('./routes/disk-info'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

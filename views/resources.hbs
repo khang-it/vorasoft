@@ -6,6 +6,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <style>
+        #chart-container {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -24,18 +30,20 @@
                 <canvas id="loadChart"></canvas>
             </div>
             <div class="col-span-1">
-                <canvas id="diskChart" width="50" height="50"></canvas>
+                <div class="col-span-1">
+                    <div id="uptime" class="text-lg font-bold"></div>
+                </div>
+                <div class="col-span-1">
+                    <h2>Region: <span id="region"></span></h2>
+                    <canvas id="networkChart" width="400" height="400"></canvas>
+                </div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-4 mt-4">
-            <div class="col-span-1">
-                <div id="uptime" class="text-lg font-bold"></div>
-            </div>
-            <div class="col-span-1">
-                <h2>Region: <span id="region"></span></h2>
-                <canvas id="networkChart" width="400" height="400"></canvas>
-            </div>
+
+        <div id="chart-container">
+            <canvas id="disk-chart"></canvas>
         </div>
+
     </div>
 
     <script>
@@ -143,7 +151,7 @@
 
 
             const { region, network } = data;
-            console.log('region, network:', region, network)
+            //console.log('region, network:', region, network)
 
             document.getElementById('region').textContent = region;
 
@@ -156,7 +164,9 @@
         });
 
 
-        fetch('/disk-usage')
+
+
+        /* fetch('/disk-usage')
             .then(response => response.json())
             .then(data => {
                 const used = data.used;
@@ -183,7 +193,79 @@
                     data: chartData
                 });
             })
-            .catch(error => console.error('Error fetching disk usage data:', error));
+            .catch(error => console.error('Error fetching disk usage data:', error)); */
+
+        let chart;
+
+        // Khởi tạo biểu đồ
+        const ctx = document.getElementById('disk-chart').getContext('2d');
+        const data = {
+            labels: [], // Tên đĩa
+            datasets: [
+                {
+                    label: 'Read Speed (MB/s)',
+                    data: [],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                },
+                {
+                    label: 'Write Speed (MB/s)',
+                    data: [],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                },
+            ],
+        };
+
+        const options = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Speed (MB/s)',
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Disks',
+                    },
+                },
+            },
+        };
+
+        chart = new Chart(ctx, {
+            type: 'line', // Sử dụng biểu đồ miền (dạng line với fill)
+            data,
+            options,
+        });
+
+        // Cập nhật biểu đồ
+        function updateChart(diskInfo) {
+            data.labels = diskInfo.map(disk => disk.mounted);
+            data.datasets[0].data = diskInfo.map(disk => disk.readSpeed);
+            data.datasets[1].data = diskInfo.map(disk => disk.writeSpeed);
+
+            chart.update();
+        }
+
+
+        fetch('/disk-info')
+            .then(response => response.json())
+            .then(diskInfo => {
+                console.log('Disk info updated:', diskInfo);
+                updateChart(diskInfo);
+            });
+
+        socket.on('disk-info', (diskInfo) => {
+            updateChart(diskInfo);
+        });
+
     </script>
 </body>
 
